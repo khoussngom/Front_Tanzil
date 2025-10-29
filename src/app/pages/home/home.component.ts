@@ -46,13 +46,14 @@ gsap.registerPlugin(ScrollTrigger);
             {{ 'HOME.HERO_DESC' | translate }}
           </p>
 
-          <app-button-cta
-            [texte]="'HOME.HERO_CTA' | translate"
-            variante="primaire"
-            taille="grand"
-            (click)="naviguerVersInvestissement()"
-            class="mb-8"
-          ></app-button-cta>
+          <div class="hero-button-box opacity-0 mb-8" aria-hidden="true">
+            <app-button-cta
+              [texte]="'HOME.HERO_CTA' | translate"
+              variante="primaire"
+              taille="grand"
+              (click)="naviguerVersInvestissement()"
+            ></app-button-cta>
+          </div>
 
           <div class="mt-8">
             <p class="text-sm text-gray-700 mb-3 font-medium">
@@ -87,14 +88,14 @@ gsap.registerPlugin(ScrollTrigger);
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
           <!-- Texte à gauche -->
           <div class="pr-6">
-            <h2 class="text-3xl md:text-4xl font-montserrat font-bold text-[#1f4b79] mb-6 slide-up">
+            <h2 class="text-3xl md:text-4xl font-montserrat font-bold text-[#1f4b79] mb-6">
               {{ 'HOME.VISION_TITRE' | translate }}
             </h2>
-            <p class="text-base md:text-lg text-gray-700 leading-relaxed mb-8 slide-up">
+            <p class="text-base md:text-lg text-gray-700 leading-relaxed mb-8">
               {{ 'HOME.VISION_DESCRIPTION' | translate }}
             </p>
 
-            <div class="bg-gray-900 text-white rounded-xl p-6 max-w-xl shadow-lg">
+            <div class="vision-list-box bg-gray-900 text-white rounded-xl p-6 max-w-xl shadow-lg opacity-0" aria-hidden="true">
               <ul class="space-y-4">
                 <li class="flex items-center justify-between">
                   <span class="text-lg">{{ 'HOME.VISION_LIST_ITEM_1' | translate }}</span>
@@ -131,18 +132,21 @@ gsap.registerPlugin(ScrollTrigger);
 
   <section #sectionAnim class="cta-section py-20 bg-bleu-fonce text-white text-center">
       <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-montserrat font-bold mb-6 slide-up">
+            <h2 class="text-4xl font-montserrat font-bold mb-6">
           {{ 'HOME.CTA_INVESTIR' | translate }}
         </h2>
-        <p class="text-xl mb-8 max-w-2xl mx-auto slide-up">
+        <p class="text-xl mb-8 max-w-2xl mx-auto">
           Rejoignez notre programme d'investissement participatif.
         </p>
-        <app-button-cta
-          [texte]="'HOME.CTA_INVESTIR' | translate"
-          variante="secondaire"
-          taille="grand"
-          (click)="naviguerVersInvestissement()"
-        ></app-button-cta>
+
+        <div class="cta-list-box opacity-0 flex justify-center" aria-hidden="true">
+          <app-button-cta
+            [texte]="'HOME.CTA_INVESTIR' | translate"
+            variante="secondaire"
+            taille="grand"
+            (click)="naviguerVersInvestissement()"
+          ></app-button-cta>
+        </div>
       </div>
     </section>
 
@@ -295,22 +299,46 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     // Helper: transforme le texte d'un élément en spans par caractère
     const splitText = (el: HTMLElement) => {
+      // Ne pas ré-appliquer si déjà split
       if (!el || el.dataset['split'] === 'true') return;
       const text = el.textContent || '';
       if (!text.trim()) return;
-      // Créer les spans pour chaque caractère
+
+      // On split par MOTS afin d'éviter que des mots soient coupés
+      // lors du retour à la ligne. Chaque mot devient un conteneur
+      // inline-block (gsap-word) contenant des spans par caractère
+      // (gsap-char) pour l'animation lettre-par-lettre.
+      const words = text.split(/(\s+)/); // conserver les espaces dans le tableau
       const frag = document.createDocumentFragment();
-      for (const ch of Array.from(text)) {
-        const span = document.createElement('span');
-        span.textContent = ch === ' ' ? '\u00A0' : ch;
-        // display inline-block to allow translateY on each char
-        span.style.display = 'inline-block';
-        span.style.opacity = '0';
-        span.style.transform = 'translateY(6px)';
-        // class pour cibler uniquement les caractères créés par splitText
-        span.classList.add('gsap-char');
-        frag.appendChild(span);
-      }
+
+      words.forEach((token) => {
+        if (/^\s+$/.test(token)) {
+          // espace(s) — ajouter un texte simple pour préserver l'espacement
+          frag.appendChild(document.createTextNode(token));
+          return;
+        }
+
+        // conteneur mot — display inline-block pour empêcher le
+        // découpage à l'intérieur du mot
+        const wordSpan = document.createElement('span');
+        wordSpan.classList.add('gsap-word');
+        wordSpan.style.display = 'inline-block';
+        wordSpan.style.whiteSpace = 'nowrap';
+
+        // créer un span par caractère pour l'animation
+        for (const ch of Array.from(token)) {
+          const span = document.createElement('span');
+          span.textContent = ch;
+          span.style.display = 'inline-block';
+          span.style.opacity = '0';
+          span.style.transform = 'translateY(6px)';
+          span.classList.add('gsap-char');
+          wordSpan.appendChild(span);
+        }
+
+        frag.appendChild(wordSpan);
+      });
+
       el.innerHTML = '';
       el.appendChild(frag);
       el.dataset['split'] = 'true';
@@ -356,12 +384,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
         // caractères: apparaissent lettre par lettre, très doux
         // caractères: apparaissent lettre par lettre, très doux
+        let charTotalTime = 0;
+        const charDuration = 0.6;
+        const charStagger = 0.02;
         if (charSpans.length) {
+          // calculer la durée totale de l'animation des caractères pour pouvoir
+          // lancer l'animation du bloc (ex: la liste noire) juste après
+          charTotalTime = charDuration + Math.max(0, (charSpans.length - 1)) * charStagger;
+
           tl.to(charSpans, {
             opacity: 1,
             y: 0,
-            duration: 0.6,
-            stagger: 0.02,
+            duration: charDuration,
+            stagger: charStagger,
             ease: 'power2.out'
           }, 0);
         }
@@ -387,6 +422,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
             duration: 0.8,
             stagger: 0.08
           }, 0.08);
+        }
+
+  // Si la section contient un ou plusieurs blocs à révéler après le texte
+  // (ex: .vision-list-box, .cta-list-box, .hero-button-box), on les affiche seulement après
+  // la fin de l'animation des caractères.
+  const revealSelectors = '.vision-list-box, .cta-list-box, .hero-button-box';
+        const listBoxes = Array.from(sec.querySelectorAll(revealSelectors)) as HTMLElement[];
+        if (listBoxes.length) {
+          const offset = 0.05;
+          const when = charTotalTime > 0 ? (charTotalTime + offset) : 0.08;
+        listBoxes.forEach((box) => {
+          // s'assurer que le bloc commence masqué (tailwind opacity-0 déjà ajouté)
+          box.setAttribute('aria-hidden', 'true'); // ajouter aria-hidden au début
+          tl.fromTo(box, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', onStart: () => box.removeAttribute('aria-hidden') }, when);
+          });
         }
 
         // play automatiquement grâce à ScrollTrigger (timeline paused: true est contrôlé par ScrollTrigger)
