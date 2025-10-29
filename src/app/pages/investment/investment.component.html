@@ -1,0 +1,170 @@
+<section class="hero-investment py-20 bg-gradient-to-r from-accent-jaune to-accent-orange text-bleu-fonce">
+  <div class="container mx-auto px-4 text-center">
+    <h1 class="text-5xl font-montserrat font-bold mb-6">
+      {{ data?.titre }}
+    </h1>
+    <p class="text-xl max-w-2xl mx-auto">
+      {{ data?.sousTitre }}
+    </p>
+  </div>
+</section>
+
+<section class="concept-section py-20 bg-white/80 backdrop-blur-md">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-montserrat font-bold text-bleu-fonce mb-8">
+        {{ data?.conceptTitre }}
+      </h2>
+      <p class="text-lg text-gris-acier mb-12">
+        {{ data?.conceptDescription }}
+      </p>
+
+      <div class="avantages-list grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div *ngFor="let avantage of data?.avantages" class="avantage-item bg-white/80 backdrop-blur-md p-6 rounded-lg">
+          <div class="flex items-center">
+            <div class="w-3 h-3 bg-accent-jaune rounded-full mr-4"></div>
+            <p class="text-bleu-fonce font-medium">{{ avantage }}</p>
+          </div>
+        </div>
+      </div>
+
+      <app-button-cta
+        [texte]="boutonTexteSinscrire"
+        variante="primaire"
+        taille="grand"
+        (onClick)="afficherFormulaire()"
+      ></app-button-cta>
+    </div>
+  </div>
+</section>
+
+<section class="projets-investissement-section py-20 bg-gray-50/80 backdrop-blur-md">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-montserrat font-bold text-bleu-fonce text-center mb-16">
+      {{ 'INVESTMENT.PROJETS_TITRE' | translate }}
+    </h2>
+
+    <div class="projets-table overflow-x-auto bg-white/80 backdrop-blur-md rounded-lg shadow-lg">
+      <table class="w-full">
+        <thead class="bg-bleu-fonce text-white">
+          <tr>
+            <th class="px-6 py-4 text-left">{{ 'INVESTMENT.SECTEUR' | translate }}</th>
+            <th class="px-6 py-4 text-left">{{ 'COMMON.NOM' | translate }}</th>
+            <th class="px-6 py-4 text-left">{{ 'INVESTMENT.MONTANT_MINIMUM' | translate }}</th>
+            <th class="px-6 py-4 text-left">{{ 'INVESTMENT.RENDEMENT_ATTENDU' | translate }}</th>
+            <th class="px-6 py-4 text-left">{{ 'INVESTMENT.DUREE' | translate }}</th>
+            <th class="px-6 py-4 text-left">{{ 'INVESTMENT.STATUT' | translate }}</th>
+            <th class="px-6 py-4 text-left">{{ 'INVESTMENT.DESCRIPTION' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let projet of data?.projets" class="table-row border-b hover:bg-gray-50/80">
+            <td class="px-6 py-4">{{ projet.secteur }}</td>
+            <td class="px-6 py-4 font-medium">{{ projet.nom }}</td>
+            <td class="px-6 py-4">{{ projet.montantMinimum | number }} FCFA</td>
+            <td class="px-6 py-4 text-green-600 font-medium">{{ projet.rendementAttendu }}</td>
+            <td class="px-6 py-4">{{ projet.duree }}</td>
+            <td class="px-6 py-4">
+              <span [class]="projet.statut.includes('Ouvert') ? 'bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm' : 'bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-sm'">
+                {{ projet.statut }}
+              </span>
+            </td>
+            <td class="px-6 py-4">{{ projet.description }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="afficherForm" class="formulaire-section py-20 bg-white/80 backdrop-blur-md">
+  <div class="container mx-auto px-4">
+    <div class="max-w-2xl mx-auto bg-white/80 backdrop-blur-md p-8 rounded-lg shadow-lg">
+      <h2 class="text-3xl font-montserrat font-bold text-bleu-fonce text-center mb-4">
+        {{ 'INVESTMENT.FORMULAIRE_TITRE' | translate }}
+      </h2>
+      <p class="text-center text-gris-acier mb-8">
+        {{ 'INVESTMENT.FORMULAIRE_DESCRIPTION' | translate }}
+      </p>
+
+      <form (ngSubmit)="soumettreFormulaire()" class="space-y-6">
+        <div>
+          <label class="block text-sm font-medium text-bleu-fonce mb-2">
+            {{ 'INVESTMENT.NOM' | translate }} *
+          </label>
+          <input
+            type="text"
+            [(ngModel)]="formulaire.nom"
+            name="nom"
+            required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-jaune"
+            placeholder="Votre nom complet"
+          >
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-bleu-fonce mb-2">
+            {{ 'INVESTMENT.EMAIL' | translate }} *
+          </label>
+          <input
+            type="email"
+            [(ngModel)]="formulaire.email"
+            name="email"
+            required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-jaune"
+            placeholder="votre.email@exemple.com"
+          >
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-bleu-fonce mb-2">
+            {{ 'INVESTMENT.TELEPHONE' | translate }} *
+          </label>
+          <input
+            type="tel"
+            [(ngModel)]="formulaire.telephone"
+            name="telephone"
+            required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-jaune"
+            placeholder="+221 XX XXX XX XX"
+          >
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-bleu-fonce mb-2">
+            {{ 'INVESTMENT.MONTANT' | translate }} *
+          </label>
+          <input
+            type="number"
+            [(ngModel)]="formulaire.montant"
+            name="montant"
+            required
+            min="25000"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-jaune"
+            placeholder="25000"
+          >
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-bleu-fonce mb-2">
+            {{ 'INVESTMENT.MESSAGE' | translate }}
+          </label>
+          <textarea
+            [(ngModel)]="formulaire.message"
+            name="message"
+            rows="4"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-jaune"
+            placeholder="Vos questions ou commentaires..."
+          ></textarea>
+        </div>
+
+        <app-button-cta
+          [texte]="boutonTexteSoumettre"
+          variante="primaire"
+          taille="moyen"
+          type="submit"
+        ></app-button-cta>
+      </form>
+    </div>
+  </div>
+</section>

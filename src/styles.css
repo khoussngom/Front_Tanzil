@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Variables CSS pour les couleurs */
+:root {
+  --bleu-fonce: #0D1B2A;
+  --gris-acier: #778DA9;
+  --blanc: #FFFFFF;
+  --accent-jaune: #F4A261;
+  --accent-orange: #E76F51;
+}
+
+/* Styles globaux */
+body {
+  font-family: 'Roboto', sans-serif;
+  color: var(--bleu-fonce);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+/* Animations GSAP */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.stagger-item {
+  opacity: 0;
+  transform: translateY(30px);
+}
