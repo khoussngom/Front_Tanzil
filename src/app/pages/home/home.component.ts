@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonCTAComponent } from '../../components/button-cta/button-cta.component';
@@ -14,7 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
   standalone: true,
   imports: [CommonModule, TranslateModule, ButtonCTAComponent],
   template: `
-      <section class="hero-section relative mt-20 flex items-center justify-center overflow-hidden py-16 ">
+    <section #sectionAnim class="hero-section relative mt-20 flex items-center justify-center overflow-hidden py-16 ">
     <!-- Overlay blanc clair semi-transparent -->
     <div class="absolute inset-0 bg-white/40 backdrop-blur-sm   "></div>
 
@@ -82,7 +82,7 @@ gsap.registerPlugin(ScrollTrigger);
     </div>
   </section>
 
-    <section class="vision-section py-20 bg-white">
+  <section #sectionAnim class="vision-section py-20 bg-white">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
           <!-- Texte à gauche -->
@@ -129,7 +129,7 @@ gsap.registerPlugin(ScrollTrigger);
       </div>
     </section>
 
-    <section class="cta-section py-20 bg-bleu-fonce text-white text-center">
+  <section #sectionAnim class="cta-section py-20 bg-bleu-fonce text-white text-center">
       <div class="container mx-auto px-4">
         <h2 class="text-4xl font-montserrat font-bold mb-6 slide-up">
           {{ 'HOME.CTA_INVESTIR' | translate }}
@@ -146,7 +146,7 @@ gsap.registerPlugin(ScrollTrigger);
       </div>
     </section>
 
-    <section class="partenaires-section py-20  backdrop-blur-md">
+  <section #sectionAnim class="partenaires-section py-20  backdrop-blur-md">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
           <h2 class="text-4xl font-montserrat font-bold text-bleu-fonce mb-6 slide-up">
@@ -177,6 +177,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   visionItems: any[] = [];
   projetsRecents: any[] = [];
   partenaires: any[] = [];
+
+  // Récupère dynamiquement toutes les sections marquées par #sectionAnim dans le template
+  @ViewChildren('sectionAnim', { read: ElementRef }) sections!: QueryList<ElementRef>;
 
   constructor(private contentService: ContentService, private router: Router) {}
 
@@ -281,6 +284,116 @@ export class HomeComponent implements OnInit, AfterViewInit {
           }
         });
       });
+    }
+
+    // -------------------------
+    // GSAP / ScrollTrigger pour les sections (typewriter + images)
+    // - Utilise @ViewChildren pour parcourir chaque section du DOM
+    // - Texte: animation lettre par lettre (typewriter), très douce
+    // - Images: fade-in + légère translation vers le haut
+    // -------------------------
+
+    // Helper: transforme le texte d'un élément en spans par caractère
+    const splitText = (el: HTMLElement) => {
+      if (!el || el.dataset['split'] === 'true') return;
+      const text = el.textContent || '';
+      if (!text.trim()) return;
+      // Créer les spans pour chaque caractère
+      const frag = document.createDocumentFragment();
+      for (const ch of Array.from(text)) {
+        const span = document.createElement('span');
+        span.textContent = ch === ' ' ? '\u00A0' : ch;
+        // display inline-block to allow translateY on each char
+        span.style.display = 'inline-block';
+        span.style.opacity = '0';
+        span.style.transform = 'translateY(6px)';
+        // class pour cibler uniquement les caractères créés par splitText
+        span.classList.add('gsap-char');
+        frag.appendChild(span);
+      }
+      el.innerHTML = '';
+      el.appendChild(frag);
+      el.dataset['split'] = 'true';
+    };
+
+    // Pour chaque section trouvée via @ViewChildren, on crée une timeline liée à ScrollTrigger
+    // La timeline anime d'abord les caractères (stagger small), puis l'image associée (fade+up)
+    try {
+      this.sections.forEach((secRef: ElementRef) => {
+        const sec = secRef.nativeElement as HTMLElement;
+
+        // sélectionner les éléments texte cibles dans la section (titres, paragraphes, items)
+        const textSelectors = 'h1, h2, h3, p, li > span.text-lg, .text-lg';
+        const textEls = Array.from(sec.querySelectorAll(textSelectors)) as HTMLElement[];
+
+        // split each text element to character spans
+        textEls.forEach((el) => splitText(el));
+
+        // récupérer tous les spans créés dans cette section (seulement ceux ajoutés par splitText)
+        const charSpans = sec.querySelectorAll('span.gsap-char');
+
+        // images cibles dans la section
+        const imgs = sec.querySelectorAll('img');
+
+        // détecter les composants personnalisés / hôtes de composants dans la section
+        // (éléments avec un tiret dans le tagName, ex: app-mon-composant),
+        // ou éléments explicitement marqués par une classe/attribut animate-component
+        const allEls = Array.from(sec.querySelectorAll('*')) as HTMLElement[];
+        const compEls = allEls.filter(el => (el.tagName && el.tagName.includes('-')) || el.classList.contains('animate-component') || el.hasAttribute('data-animate-component')) as HTMLElement[];
+
+        // timeline pour la section
+        const tl = gsap.timeline({
+          paused: true,
+          defaults: { ease: 'power2.out' },
+          scrollTrigger: {
+            trigger: sec,
+            start: 'top 80%',
+            end: 'bottom 20%',
+            toggleActions: 'play none none reverse',
+            // markers: true // décommenter pour déboguer
+          }
+        });
+
+        // caractères: apparaissent lettre par lettre, très doux
+        // caractères: apparaissent lettre par lettre, très doux
+        if (charSpans.length) {
+          tl.to(charSpans, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.02,
+            ease: 'power2.out'
+          }, 0);
+        }
+
+        // composants/hôtes: animés globalement (fade + up) pour ne pas triturer
+        // leur structure interne — utile quand le texte est rendu par un composant Angular
+        if (compEls.length) {
+          tl.from(compEls, {
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+            stagger: 0.06
+          }, 0.02);
+        }
+
+        // images: fondu + montée légère
+        // Lancer l'animation des images en parallèle (début légèrement après le début du texte)
+        // pour qu'elles n'attendent pas la fin de l'animation lettre par lettre.
+        if (imgs.length) {
+          tl.from(imgs, {
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            stagger: 0.08
+          }, 0.08);
+        }
+
+        // play automatiquement grâce à ScrollTrigger (timeline paused: true est contrôlé par ScrollTrigger)
+      });
+    } catch (err) {
+      // Si erreur, on l'ignore mais log utile en dev
+      // console.error('GSAP section animations error:', err);
     }
   }
 
