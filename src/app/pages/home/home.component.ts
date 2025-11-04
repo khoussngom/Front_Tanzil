@@ -14,7 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
   standalone: true,
   imports: [CommonModule, TranslateModule, ButtonCTAComponent],
   template: `
-    <section #sectionAnim class="hero-section relative mt-16 flex items-center justify-center overflow-hidden py-16 lg:pb-0 ">
+    <section #sectionAnim class="hero-section relative mt-16 flex items-center justify-center overflow-hidden py-16 lg:pb-0  lg:h-[92vh]">
     <!-- Overlay blanc clair semi-transparent -->
     <div class="absolute inset-0 bg-white/40 backdrop-blur-sm h-full   "></div>
 
@@ -71,9 +71,9 @@ gsap.registerPlugin(ScrollTrigger);
 
         
         <div class="hidden md:flex  ">
-          <div class="w-full max-w-lg ">
-            <div class=" rounded-3xl  flex flex-col justify-center items-end overflow-hidden   lg:h-[620px] lg:w-[700px] lg:pb-5 ">
-              <img src="assets/images/photoSection1.png"
+          <div class="w-full max-w-lg  ">
+            <div class=" rounded-3xl  flex justify-end items-end overflow-hidden   lg:h-[680px] lg:w-[500px] lg:ml-20 lg:mb-16">
+              <img src="assets/images/bg.jpeg"
                   alt="photo section"
                   class="w-full h-auto object-cover">
             </div>
