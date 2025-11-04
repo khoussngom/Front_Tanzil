@@ -83,7 +83,7 @@ gsap.registerPlugin(ScrollTrigger);
     </div>
   </section>
 
-  <section #sectionAnim class="vision-section py-20 bg-white">
+  <section #sectionAnim class="vision-section py-20 bg-white lg:h-[70vh]">
       <div class="container mx-auto px-16">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
           <!-- Texte à gauche -->
@@ -95,7 +95,7 @@ gsap.registerPlugin(ScrollTrigger);
               {{ 'HOME.VISION_DESCRIPTION' | translate }}
             </p>
 
-            <div class="vision-list-box bg-gray-900 text-white rounded-xl p-6 max-w-xl shadow-lg opacity-0" aria-hidden="true">
+            <!-- <div class="vision-list-box bg-gray-900 text-white rounded-xl p-6 max-w-xl shadow-lg opacity-0" aria-hidden="true">
               <ul class="space-y-4">
                 <li class="flex items-center justify-between">
                   <span class="text-lg">{{ 'HOME.VISION_LIST_ITEM_1' | translate }}</span>
@@ -114,13 +114,13 @@ gsap.registerPlugin(ScrollTrigger);
                   <span class="text-gray-300">↗</span>
                 </li>
               </ul>
-            </div>
+            </div> -->
           </div>
 
           <!-- Image à droite -->
           <div class="flex justify-center  md:justify-end lg:h-[100px]  ">
-            <div class="w-full bg-white/40 backdrop-blur-sm max-w-md ">
-              <div class="relative rounded-3xl overflow-hidden shadow-2xl ">
+            <div class="w-full max-w-md ">
+              <div class="flex items-center justify-center rounded-3xl overflow-hidden lg:h-[400px]  ">
                 <img src="assets/images/photoSection2.svg" alt="vision" class="w-full h-auto object-cover">
                 <!-- option: mask/clip-path could be added later to match exact découpe -->
               </div>
@@ -130,7 +130,7 @@ gsap.registerPlugin(ScrollTrigger);
       </div>
     </section>
 
-  <section #sectionAnim class="cta-section py-20 bg-bleu-fonce text-white text-center">
+  <section #sectionAnim class="cta-section py-20  bg-bleu-fonce text-white text-center ">
       <div class="container mx-auto px-4">
             <h2 class="text-4xl font-montserrat font-bold mb-6">
           {{ 'HOME.CTA_INVESTIR' | translate }}
