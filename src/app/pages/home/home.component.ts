@@ -84,7 +84,7 @@ gsap.registerPlugin(ScrollTrigger);
   </section>
 
   <section #sectionAnim class="vision-section py-20 bg-white">
-      <div class="container mx-auto px-4">
+      <div class="container mx-auto px-16">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
           <!-- Texte à gauche -->
           <div class="pr-6">
