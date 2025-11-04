@@ -133,7 +133,6 @@ export class InvestmentComponent implements OnInit, AfterViewInit {
 
   soumettreFormulaire() {
     if (this.formulaire.nom && this.formulaire.email && this.formulaire.telephone && this.formulaire.montant) {
-      console.log('Formulaire soumis:', this.formulaire);
       // TODO: Envoyer les données au backend via ApiService
       alert('Votre demande a été envoyée avec succès ! Nous vous contacterons bientôt.');
       this.afficherForm = false;

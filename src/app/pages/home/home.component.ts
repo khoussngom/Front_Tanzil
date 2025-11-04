@@ -14,13 +14,13 @@ gsap.registerPlugin(ScrollTrigger);
   standalone: true,
   imports: [CommonModule, TranslateModule, ButtonCTAComponent],
   template: `
-    <section #sectionAnim class="hero-section relative mt-20 flex items-center justify-center overflow-hidden py-16 ">
+    <section #sectionAnim class="hero-section relative mt-16 flex items-center justify-center overflow-hidden py-16 lg:pb-0 ">
     <!-- Overlay blanc clair semi-transparent -->
-    <div class="absolute inset-0 bg-white/40 backdrop-blur-sm   "></div>
+    <div class="absolute inset-0 bg-white/40 backdrop-blur-sm h-full   "></div>
 
     <!-- Vidéo fixée en arrière-plan (déjà présente dans votre page) -->
     <video
-      class="object-cover w-full h-full"
+      class="object-cover w-full h-full"  
       muted
       autoplay
       loop
@@ -55,25 +55,25 @@ gsap.registerPlugin(ScrollTrigger);
             ></app-button-cta>
           </div>
 
-          <div class="mt-8">
+          <!-- <div class="mt-8">
             <p class="text-sm text-gray-700 mb-3 font-medium">
               {{ 'HOME.HERO_PARTNERS' | translate }}
             </p>
             <div class="flex items-center gap-4">
               <img *ngFor="let partenaire of partenaires | slice:0:5" 
                   [src]="partenaire.logo" 
-                  [alt]="partenaire.nom" 
+                  [alt]="partenaire.nom"    
                   class="h-8 w-auto" 
                   loading="lazy">
             </div>
-          </div>
+          </div> -->
         </div>
 
         
-        <div class="hidden md:flex justify-end items-center">
+        <div class="hidden md:flex  ">
           <div class="w-full max-w-lg ">
-            <div class="relative rounded-3xl overflow-hidden  shadow-2xl">
-              <img src="assets/images/photoSection1.svg"
+            <div class=" rounded-3xl  flex flex-col justify-center items-end overflow-hidden   lg:h-[620px] lg:w-[700px] lg:pb-5 ">
+              <img src="assets/images/photoSection1.png"
                   alt="photo section"
                   class="w-full h-auto object-cover">
             </div>
@@ -118,7 +118,7 @@ gsap.registerPlugin(ScrollTrigger);
           </div>
 
           <!-- Image à droite -->
-          <div class="flex justify-center  md:justify-end">
+          <div class="flex justify-center  md:justify-end lg:h-[100px]  ">
             <div class="w-full bg-white/40 backdrop-blur-sm max-w-md ">
               <div class="relative rounded-3xl overflow-hidden shadow-2xl ">
                 <img src="assets/images/photoSection2.svg" alt="vision" class="w-full h-auto object-cover">
@@ -150,7 +150,7 @@ gsap.registerPlugin(ScrollTrigger);
       </div>
     </section>
 
-  <section #sectionAnim class="partenaires-section py-20  backdrop-blur-md">
+  <!-- <section #sectionAnim class="partenaires-section py-20 bg-white">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
           <h2 class="text-4xl font-montserrat font-bold text-bleu-fonce mb-6 slide-up">
@@ -167,7 +167,7 @@ gsap.registerPlugin(ScrollTrigger);
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <button (click)="retourHaut()" class="fixed bottom-4 right-4 bg-accent-jaune text-bleu-fonce p-3 rounded-full shadow-lg hover:bg-accent-orange transition-colors z-50">
       ↑

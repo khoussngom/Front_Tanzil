@@ -138,6 +138,5 @@ export class ArticleDetailComponent implements OnInit {
 
   retourAuBlog() {
     // TODO: Naviguer vers la page blog
-    console.log('Retour au blog');
   }
 }

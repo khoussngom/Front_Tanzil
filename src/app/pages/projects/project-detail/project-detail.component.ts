@@ -115,6 +115,5 @@ export class ProjectDetailComponent implements OnInit {
 
   investirDansProjet() {
     // TODO: Rediriger vers la page d'investissement
-    console.log('Investir dans le projet:', this.projet.id);
   }
 }

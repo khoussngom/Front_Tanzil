@@ -10,7 +10,7 @@
     "CONNEXION": "Connexion"
   },
   "FOOTER": {
-    "DESCRIPTION": "Leader dans le BTP, la Promotion et la Distribution en Côte d'Ivoire.",
+    "DESCRIPTION": "Leader dans le BTP, la Promotion et la Distribution au Sénégal.",
     "LIENS_RAPIDES": "Liens rapides",
     "CONTACT": "Contact",
     "EMAIL": "Email",
@@ -93,6 +93,10 @@
     "CARTE": "Our location",
     "CARTE_PLACEHOLDER": "Interactive Google Maps",
     "WHATSAPP": "Contact us on WhatsApp"
+    ,
+    "SUCCES_MESSAGE": "✅ Your message has been sent successfully. We will reply soon.",
+    "ERREUR_MESSAGE": "❌ An error occurred while sending. Please try again later.",
+    "ERREUR_CHAMPS": "Please fill in all required fields."
   },
   "BLOG": {
     "TITRE": "Blog & News",

@@ -28,9 +28,9 @@ import { TranslateModule } from '@ngx-translate/core';
           <div>
             <h4 class="font-montserrat font-bold mb-4">{{ 'FOOTER.CONTACT' | translate }}</h4>
             <div class="space-y-2 text-sm">
-              <p>{{ 'FOOTER.EMAIL' | translate }}: contact&#64;tanzil.com</p>
-              <p>{{ 'FOOTER.TELEPHONE' | translate }}: +221 XX XX XX XX</p>
-              <p>{{ 'FOOTER.ADRESSE' | translate }}: bourguiba, Sénègal</p>
+              <p>{{ 'FOOTER.EMAIL' | translate }}: ms&#64;tanzilgroupe.com</p>
+              <p>{{ 'FOOTER.TELEPHONE' | translate }}: +221 77 874 30 24</p>
+              <p>{{ 'FOOTER.ADRESSE' | translate }}: bourguiba, Sénégal</p>
             </div>
           </div>
 
