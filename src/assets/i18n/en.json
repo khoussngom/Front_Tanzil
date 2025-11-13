@@ -135,26 +135,49 @@
     "TERMINE": "Finished"
   },
   "ABOUT": {
-    "TITRE": "À propos de nous",
-    "SOUS_TITRE": "Découvrez l'histoire et les valeurs de Tanzil Corporation",
-    "TIMELINE_TITRE": "Notre histoire",
-    "TIMELINE_2015": "Fondation de Tanzil Corporation",
-    "TIMELINE_2018": "Lancement des premiers projets immobiliers",
-    "TIMELINE_2022": "Partenariat stratégique Turquie & Russie",
-    "TIMELINE_2025": "Lancement du programme d'investissement participatif",
-    "EQUIPE_TITRE": "Notre équipe",
-    "PDG": "Jean Dupont",
-    "PDG_DESC": "Ingénieur en génie civil",
-    "DG_ADJOINT": "Marie Martin",
-    "DG_ADJOINT_DESC": "Expert BTP",
-    "DIRECTEUR_INNOVATION": "Pierre Durand",
-    "DIRECTEUR_INNOVATION_DESC": "Ingénieur matériaux",
-    "DIRECTEUR_FINANCIER": "Sophie Leroy",
-    "DIRECTEUR_FINANCIER_DESC": "Analyste investissements",
-    "VALEURS_TITRE": "Nos valeurs",
-    "VALEUR_1": "Innovation & Qualité",
-    "VALEUR_2": "Transparence & Performance",
-    "VALEUR_3": "Partenariat & Développement local"
+    "TITRE": "About Tanzil",
+    "DESCRIPTION_1": "TANZIL CORPORATION is a Senegalese company specializing in building and public works, as well as real estate development and hygiene materials distribution.",
+    "DESCRIPTION_2": "We prioritize technology, quality and transparency at the heart of our achievements.",
+    "CTA_BUTTON": "Contact us →",
+    "MISSION_TITLE": "For Tanzil Corporation, building goes far beyond walls: we create spaces that inspire and build a sustainable future.",
+    "TIMELINE_TITRE": "Our History",
+    "TIMELINE_2009": {
+      "TITRE": "Foundation",
+      "DESCRIPTION": "Creation of Tanzil Corporation with a clear vision: to revolutionize the construction sector in Senegal."
+    },
+    "TIMELINE_2012": {
+      "TITRE": "First major project",
+      "DESCRIPTION": "Realization of our first luxury residential complex, establishing our reputation for excellence."
+    },
+    "TIMELINE_2015": {
+      "TITRE": "Expansion",
+      "DESCRIPTION": "Broadening our activities towards hygiene materials distribution and diversification of our portfolio."
+    },
+    "TIMELINE_2018": {
+      "TITRE": "Technological innovation",
+      "DESCRIPTION": "Adoption of the latest construction technologies and implementation of digitized processes."
+    },
+    "TIMELINE_2020": {
+      "TITRE": "Quality certification",
+      "DESCRIPTION": "Obtaining international certifications in quality and sustainable development."
+    },
+    "TIMELINE_2025": {
+      "TITRE": "Regional leadership",
+      "DESCRIPTION": "Positioning as a leader in sustainable construction and luxury real estate in West Africa."
+    },
+    "CONTACT_TITRE": "Contact Us",
+    "FORM_NOM": "Full Name",
+    "FORM_EMAIL": "Email",
+    "FORM_MESSAGE": "Your Message",
+    "FORM_ENVOYER": "Send message",
+    "CONTACT_ADRESSE": "Address",
+    "CONTACT_TELEPHONE": "Phone",
+    "CONTACT_EMAIL": "Email",
+    "HORAIRES_TITRE": "Opening hours",
+    "HORAIRES_LUNDI_VENDREDI": "Monday - Friday",
+    "HORAIRES_SAMEDI": "Saturday",
+    "HORAIRES_DIMANCHE": "Sunday",
+    "HORAIRES_FERME": "Closed"
   },
   "PROJECT_DETAIL": {
     "INFORMATIONS": "Informations du projet",

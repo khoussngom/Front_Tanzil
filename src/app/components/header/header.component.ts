@@ -186,13 +186,13 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     // Détecter la route actuelle lors du chargement initial
-    this.isContactPage = this.router.url.includes('/contact');
-    
+    this.isContactPage = this.router.url.includes('/contact') || this.router.url.includes('/a-propos');
+
     // Écouter les changements de route
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event) => {
-      this.isContactPage = event.url.includes('/contact');
+      this.isContactPage = event.url.includes('/contact') || event.url.includes('/a-propos');
     });
   }
 

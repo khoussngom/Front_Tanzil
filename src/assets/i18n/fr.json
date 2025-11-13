@@ -135,26 +135,49 @@
     "TERMINE": "Terminé"
   },
   "ABOUT": {
-    "TITRE": "À propos de nous",
-    "SOUS_TITRE": "Découvrez l'histoire et les valeurs de Tanzil Corporation",
-    "TIMELINE_TITRE": "Notre histoire",
-    "TIMELINE_2015": "Fondation de Tanzil Corporation",
-    "TIMELINE_2018": "Lancement des premiers projets immobiliers",
-    "TIMELINE_2022": "Partenariat stratégique Turquie & Russie",
-    "TIMELINE_2025": "Lancement du programme d'investissement participatif",
-    "EQUIPE_TITRE": "Notre équipe",
-    "PDG": "Jean Dupont",
-    "PDG_DESC": "Ingénieur en génie civil",
-    "DG_ADJOINT": "Marie Martin",
-    "DG_ADJOINT_DESC": "Expert BTP",
-    "DIRECTEUR_INNOVATION": "Pierre Durand",
-    "DIRECTEUR_INNOVATION_DESC": "Ingénieur matériaux",
-    "DIRECTEUR_FINANCIER": "Sophie Leroy",
-    "DIRECTEUR_FINANCIER_DESC": "Analyste investissements",
-    "VALEURS_TITRE": "Nos valeurs",
-    "VALEUR_1": "Innovation & Qualité",
-    "VALEUR_2": "Transparence & Performance",
-    "VALEUR_3": "Partenariat & Développement local"
+    "TITRE": "À propos de Tanzil",
+    "DESCRIPTION_1": "TANZIL CORPORATION est une entreprise sénégalaise spécialisée dans le bâtiment et les travaux publics, ainsi que dans la promotion immobilière et la distribution de matériaux d'hygiène.",
+    "DESCRIPTION_2": "Nous privilégions la technologie, la qualité et la transparence au cœur de nos réalisations.",
+    "CTA_BUTTON": "Contactez nous →",
+    "MISSION_TITLE": "Pour Tanzil Corporation construire va bien au-delà des murs : nous créons des espaces qui inspirent et bâtissent un avenir durable.",
+    "TIMELINE_TITRE": "Notre Histoire",
+    "TIMELINE_2009": {
+      "TITRE": "Fondation",
+      "DESCRIPTION": "Création de Tanzil Corporation avec une vision claire : révolutionner le secteur de la construction au Sénégal."
+    },
+    "TIMELINE_2012": {
+      "TITRE": "Premier grand projet",
+      "DESCRIPTION": "Réalisation de notre premier complexe résidentiel de standing, établissant notre réputation d'excellence."
+    },
+    "TIMELINE_2015": {
+      "TITRE": "Expansion",
+      "DESCRIPTION": "Élargissement de nos activités vers la distribution de matériaux d'hygiène et diversification de notre portfolio."
+    },
+    "TIMELINE_2018": {
+      "TITRE": "Innovation technologique",
+      "DESCRIPTION": "Adoption des dernières technologies de construction et mise en place de processus digitalisés."
+    },
+    "TIMELINE_2020": {
+      "TITRE": "Certification qualité",
+      "DESCRIPTION": "Obtention de certifications internationales en matière de qualité et de développement durable."
+    },
+    "TIMELINE_2025": {
+      "TITRE": "Leadership régional",
+      "DESCRIPTION": "Positionnement comme leader dans la construction durable et l'immobilier de prestige en Afrique de l'Ouest."
+    },
+    "CONTACT_TITRE": "Nous Contacter",
+    "FORM_NOM": "Nom Complet",
+    "FORM_EMAIL": "E-mail",
+    "FORM_MESSAGE": "Votre Message",
+    "FORM_ENVOYER": "Envoyer message",
+    "CONTACT_ADRESSE": "Adresse",
+    "CONTACT_TELEPHONE": "Téléphone",
+    "CONTACT_EMAIL": "E-mail",
+    "HORAIRES_TITRE": "Horaires d'ouverture",
+    "HORAIRES_LUNDI_VENDREDI": "Lundi - Vendredi",
+    "HORAIRES_SAMEDI": "Samedi",
+    "HORAIRES_DIMANCHE": "Dimanche",
+    "HORAIRES_FERME": "Fermé"
   },
   "PROJECT_DETAIL": {
     "INFORMATIONS": "Informations du projet",
