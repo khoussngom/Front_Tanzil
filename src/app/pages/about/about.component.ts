@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -20,7 +21,7 @@ interface Project {
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
 
@@ -38,7 +39,7 @@ interface Project {
             <p class="text-gray-600 mb-8 leading-relaxed text-base md:text-lg">
               {{ 'ABOUT.DESCRIPTION_2' | translate }}
             </p>
-            <button class="bg-blue-900 text-white px-8 py-3 rounded-lg hover:bg-blue-800 transition-all font-semibold shadow-md hover:shadow-lg">
+            <button routerLink="/contact" class="bg-blue-900 text-white px-8 py-3 rounded-lg hover:bg-blue-800 transition-all font-semibold shadow-md hover:shadow-lg">
               {{ 'ABOUT.CTA_BUTTON' | translate }}
             </button>
           </div>
