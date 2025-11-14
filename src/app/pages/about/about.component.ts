@@ -119,21 +119,21 @@ interface Project {
     </section>
 
     <!-- Section Timeline -->
-    <section class="timeline-section py-16 md:py-24 bg-white">
+    <!-- <section class="timeline-section py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl md:text-4xl font-bold text-blue-900 text-center mb-12 md:mb-16 slide-up">
           {{ 'ABOUT.TIMELINE_TITRE' | translate }}
         </h2>
 
         <div class="relative max-w-6xl mx-auto">
-          <!-- Ligne centrale -->
+  
           <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-yellow-400 timeline-line"></div>
 
           <div class="space-y-8 md:space-y-12">
             <div *ngFor="let event of timeline; let i = index" 
                  class="relative flex flex-col md:flex-row items-center gap-6 md:gap-8">
               
-              <!-- Contenu -->
+          
               <div class="w-full md:w-1/2" 
                    [ngClass]="i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:order-2 md:pl-12 md:text-left'">
                 <div class="bg-white border-2 border-gray-100 p-6 md:p-8 rounded-xl shadow-md hover:shadow-lg transition-all slide-up">
@@ -145,16 +145,16 @@ interface Project {
                 </div>
               </div>
 
-              <!-- Point central -->
+              
               <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-yellow-400 rounded-full border-4 border-white shadow-lg z-10"></div>
               
-              <!-- Espaceur -->
+            
               <div class="hidden md:block w-1/2"></div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- Section Contact -->
     <section class="py-16 md:py-20 bg-gray-50">

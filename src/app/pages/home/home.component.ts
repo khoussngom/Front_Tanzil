@@ -140,12 +140,12 @@ gsap.registerPlugin(ScrollTrigger);
         </p>
 
         <div class="cta-list-box opacity-0 flex justify-center" aria-hidden="true">
-          <app-button-cta
+          <!-- <app-button-cta
             [texte]="'HOME.CTA_INVESTIR' | translate"
             variante="secondaire"
             taille="grand"
             (click)="naviguerVersInvestissement()"
-          ></app-button-cta>
+          ></app-button-cta> -->
         </div>
       </div>
     </section>
